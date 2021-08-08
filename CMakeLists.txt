@@ -34,21 +34,21 @@ endif()
 
 # This is the main part:
 
-# add_subdirectory(src)
-
 include_directories(
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/src
 )
 
-file(GLOB sources
+# Include any headers and c files to add to the executable
+
+file(GLOB main_sources
         "${PROJECT_SOURCE_DIR}/include/*.h"
         "${PROJECT_SOURCE_DIR}/include/*.hpp"
         "${PROJECT_SOURCE_DIR}/src/*.c"
 		"${PROJECT_SOURCE_DIR}/src/*.cpp"
 )
 
-add_executable(${PROJECT_NAME} ${sources})
+add_executable(${PROJECT_NAME} ${main_sources})
 
 target_link_libraries(${PROJECT_NAME} raylib)
 
