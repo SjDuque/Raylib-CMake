@@ -4,6 +4,15 @@ A simple template for using Raylib on any platform with CMake.
 
 *Although I recommend installing Raylib through a package manager, this project doesn't require you to have raylib installed at all. In the event that CMake cannot find Raylib, it'll automatically install everything you need into the project's build directory.*
 
+## Building
+
+```
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
 ## Acknowledgement Stuff
 
 The main.cpp file is from an example from www.raylib.com
