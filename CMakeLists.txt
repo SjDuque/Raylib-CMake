@@ -10,9 +10,6 @@ set(CMAKE_CXX_STANDARD 11)
 # set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 # set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# Copy assets
-file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
-
 # Set this to the minimal version you want to support
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 
@@ -49,15 +46,18 @@ include_directories(
 # Include any headers and c files to add to the executable
 
 file(GLOB main_sources
-        "${PROJECT_SOURCE_DIR}/include/*.h"
-        "${PROJECT_SOURCE_DIR}/include/*.hpp"
-        "${PROJECT_SOURCE_DIR}/src/*.c"
+		"${PROJECT_SOURCE_DIR}/include/*.h"
+		"${PROJECT_SOURCE_DIR}/include/*.hpp"
+		"${PROJECT_SOURCE_DIR}/src/*.c"
 		"${PROJECT_SOURCE_DIR}/src/*.cpp"
 )
 
 add_executable(${PROJECT_NAME} ${main_sources})
 
 target_link_libraries(${PROJECT_NAME} raylib)
+
+# Copy assets
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)
