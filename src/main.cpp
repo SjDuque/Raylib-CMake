@@ -1,6 +1,6 @@
 /*******************************************************************************************
 *
-*   raylib [core] example - Keyboard input
+*   raylib [textures] example - Texture loading and drawing
 *
 *   This example has been created using raylib 1.0 (www.raylib.com)
 *   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
@@ -8,10 +8,9 @@
 *   Copyright (c) 2014 Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
-#include <iostream>
+
 #include "raylib.h"
 #include "my_math.hpp"
-
 
 int main(void)
 {
@@ -19,23 +18,19 @@ int main(void)
     //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
-	float x = 5;
-	float y = 6;
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
-		
-    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
+    InitWindow(screenWidth, screenHeight, "raylib [textures] example - texture loading and drawing");
+
+    // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
+    Texture2D texture = LoadTexture("assets/raylib_logo.png");        // Texture loading
+    //---------------------------------------------------------------------------------------
+
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
-        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
-        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
-        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+        // TODO: Update your variables here
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -44,9 +39,9 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+            DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, WHITE);
 
-            DrawCircleV(ballPosition, 50, MAROON);
+            DrawText("this IS a texture!", 360, 370, 10, GRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -54,7 +49,9 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
+    UnloadTexture(texture);       // Texture unloading
+
+    CloseWindow();                // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

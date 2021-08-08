@@ -5,8 +5,16 @@ project(main)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 
+# Setting output directories
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+# Copy assets
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
 # Set this to the minimal version you want to support
-find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
+find_package(raylib 3.8 QUIET) # Let CMake search for a raylib-config.cmake
 
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
@@ -17,7 +25,6 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
     raylib
     URL https://github.com/raysan5/raylib/archive/master.tar.gz
   )
-
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
     set(FETCHCONTENT_QUIET NO)

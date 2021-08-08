@@ -1,1 +1,8 @@
-.vscode
+# Ignore the stupid meta data
+.idea/
+.vs/
+.vscode/
+
+# Ignore build and bin
+build/
+bin/
