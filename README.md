@@ -1,8 +1,12 @@
 # Raylib-CMake-Template
 
-A simple template for using Raylib on any platform with CMake. This doesn't even require you to have Raylib installed on your system as the CMakeLists.txt will take care of installation for you if Raylib is not found.
+A simple template for using Raylib on any platform with CMake. 
+
+*Although I recommend installing Raylib through a package manager, this project doesn't require you to have raylib installed at all. In the event that CMake cannot find Raylib, it'll automatically install everything you need into the project's build directory.*
+
+## Acknowledgement Stuff
 
 The main.cpp file is from an example from www.raylib.com
 The CMakeLists.txt is modified from https://github.com/raysan5/raylib/blob/master/projects/CMake/CMakeLists.txt
 
-FEEL FREE TO DELETE THE LICENSE. IT'S ONLY THERE AS A PLACE HOLDER
+FEEL FREE TO DELETE THE README and LICENSE. IT'S ONLY THERE AS A PLACE HOLDER. I DO NOT CARE ABOUT ANY MODIFICATION OR COPYING OF THIS REPOSITORY.
