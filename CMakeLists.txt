@@ -13,6 +13,9 @@ set(CMAKE_CXX_STANDARD 11)
 # Set this to the minimal version you want to support
 find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
 
+# If you are using VCPKG:
+# find_package(raylib CONFIG REQUIRED)
+
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
 if (NOT raylib_FOUND) # If there's none, fetch and build raylib
@@ -52,30 +55,38 @@ file(GLOB main_sources
 
 add_executable(${PROJECT_NAME} ${main_sources})
 
+# If you are using a package manager such as brew or apt-get
 target_link_libraries(${PROJECT_NAME} raylib)
+
+# If you are using VCPKG:
+# target_include_directories(${PROJECT_NAME} PRIVATE ${RAYLIB_INCLUDE_DIRS})
+# target_link_libraries(${PROJECT_NAME} PRIVATE ${RAYLIB_LIBRARIES}) 
 
 #-------------------------
 # Copy assets
 #-------------------------
 
-# file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
-
-# Set a symbolic link so exe can find the /Data folder
+# Set a symbolic link so exe can find the /assets folder
 
 set(link_src "${CMAKE_SOURCE_DIR}/assets")
-if(UNIX) # use "if (UNIX AND NOT APPLE)" if your configs get separated on osx
-	set(link_dst "${CMAKE_CURRENT_BINARY_DIR}/assets") 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC") # use "if (UNIX AND NOT APPLE)" if your configs get separated on osx
+	set(link_dst "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/<assets") 
 else() 
-	set(link_dst "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/assets") 
+	set(link_dst "${CMAKE_CURRENT_BINARY_DIR}/assets") 
 endif() 
 
-add_custom_command( 
-	TARGET ${PROJECT_NAME} 
-	POST_BUILD COMMAND ${CMAKE_COMMAND} 
-			-E create_symlink ${link_src} ${link_dst} 
-	DEPENDS ${link_dst} 
-	COMMENT "symbolic link ${link_src} => ${link_dst}" 
-)
+if (UNIX)
+	add_custom_command( 
+		TARGET ${PROJECT_NAME} 
+		POST_BUILD COMMAND ${CMAKE_COMMAND} 
+				-E create_symlink ${link_src} ${link_dst} 
+		DEPENDS ${link_dst} 
+		COMMENT "symbolic link ${link_src} => ${link_dst}" 
+	)
+else()
+	file(COPY ${link_src} DESTINATION ${link_dst}/..)
+	message(STATUS "copying files ${link_src} => ${link_dst}") 
+endif()
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)
