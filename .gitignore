@@ -5,9 +5,16 @@
 .vs/
 .vscode/
 
+#---------------------------------------
 # Ignore build and bin
+#---------------------------------------
 build/
 bin/
+
+#---------------------------------------
+# USING GITIGNORE.IO TO IGNORE OS
+# SPECIFIC FILES AS WELL AS C/C++
+#---------------------------------------
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,macos,windows,c++,c
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,macos,windows,c++,c
