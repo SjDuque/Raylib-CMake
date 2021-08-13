@@ -12,7 +12,7 @@ You can either use `git`, `curl`, or `wget` to download the repository.
 
 ```
 git clone --depth=1 https://github.com/SjDuque/Raylib-CMake
-rm -rf Raylib-CMake-Template/.git
+rm -rf Raylib-CMake/.git
 ```
 
 Using curl:
