@@ -1,4 +1,4 @@
-# Raylib-CMake-Template
+# Raylib-CMake
 
 A simple template for using Raylib on any platform with CMake. 
 
@@ -11,30 +11,30 @@ You can either use `git`, `curl`, or `wget` to download the repository.
 (Recommended) Using git:
 
 ```
-git clone --depth=1 https://github.com/SjDuque/Raylib-CMake-Template
+git clone --depth=1 https://github.com/SjDuque/Raylib-CMake
 rm -rf Raylib-CMake-Template/.git
 ```
 
 Using curl:
 
 ```
-curl -L https://github.com/SjDuque/Raylib-CMake-Template/archive/main.zip -o raylib_template.zip
-unzip raylib_template.zip
-rm -rf raylib_template.zip
+curl -L https://github.com/SjDuque/Raylib-CMake/archive/main.zip -o raylib_cmake.zip
+unzip raylib_cmake.zip
+rm -rf raylib_cmake.zip
 ```
 
 Using wget:
 
 ```
-wget https://github.com/SjDuque/Raylib-CMake-Template/archive/main.zip -O raylib_template.zip
-unzip raylib_template.zip
-rm -rf raylib_template.zip
+wget https://github.com/SjDuque/Raylib-CMake/archive/main.zip -O raylib_cmake.zip
+unzip raylib_cmake.zip
+rm -rf raylib_cmake.zip
 ```
 
 ## Building
 
 ```
-cd Raylib-CMake-Template
+cd Raylib-CMake
 mkdir build
 cd build
 cmake ..
