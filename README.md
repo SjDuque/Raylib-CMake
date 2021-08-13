@@ -7,7 +7,7 @@ A simple template for using Raylib on any platform with CMake.
 ## Building
 
 ```
-git clone https://github.com/SjDuque/Raylib-CMake-Template
+git clone --depth=1 https://github.com/SjDuque/Raylib-CMake-Template
 cd Raylib-CMake-Template
 mkdir build
 cd build
