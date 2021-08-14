@@ -1,7 +1,6 @@
-namespace my_math {
-	const float F_PI = 3.14159265358979f;
+#include "my_math.hpp"
 
-	float add(float x, float y){
-		return x + y;
-	}
+float My_Math::add(float x, float y)
+{
+	return x + y;
 }
