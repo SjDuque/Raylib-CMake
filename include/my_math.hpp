@@ -1,9 +1,11 @@
-#ifndef MY_MATH_H_
-#define MY_MATH_H_
+#ifndef MY_MATH_H
+#define MY_MATH_H
 
-namespace my_math{
+class My_Math
+{   
+	public:
 	const float F_PI = 3.14159;
 	float add(float x, float y);
-}
+};
 
 #endif
