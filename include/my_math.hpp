@@ -1,7 +1,7 @@
 #ifndef MY_MATH_H
 #define MY_MATH_H
 
-class My_Math
+class MyMath
 {   
 	public:
 	const float F_PI = 3.14159;
