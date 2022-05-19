@@ -5,17 +5,23 @@ project(main)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 
-# Setting output directories
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
-# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# Include any headers and c files to add to the executable
+include_directories(
+	${PROJECT_SOURCE_DIR}/include
+	${PROJECT_SOURCE_DIR}/src
+)
 
-# Set this to the minimal version you want to support
-find_package(raylib 3.0 QUIET) # Let CMake search for a raylib-config.cmake
+file(GLOB main_sources
+	"${PROJECT_SOURCE_DIR}/include/*.h"
+	"${PROJECT_SOURCE_DIR}/include/*.hpp"
+	"${PROJECT_SOURCE_DIR}/src/*.c"
+	"${PROJECT_SOURCE_DIR}/src/*.cpp"
+)
 
-# If you are using VCPKG:
-# find_package(raylib CONFIG REQUIRED)
+add_executable(${PROJECT_NAME} ${main_sources})
 
+# Find Raylib
+find_package(raylib CONFIG QUIET)
 # You could change the QUIET above to REQUIRED and remove this if() clause
 # This part downloads raylib and builds it if it's not installed on your system
 if (NOT raylib_FOUND) # If there's none, fetch and build raylib
@@ -38,33 +44,9 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 	endif()
 endif()
 
-#-------------------------
-# Include any headers and c files to add to the executable
-#-------------------------
-include_directories(
-	${PROJECT_SOURCE_DIR}/include
-	${PROJECT_SOURCE_DIR}/src
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
-file(GLOB main_sources
-	"${PROJECT_SOURCE_DIR}/include/*.h"
-	"${PROJECT_SOURCE_DIR}/include/*.hpp"
-	"${PROJECT_SOURCE_DIR}/src/*.c"
-	"${PROJECT_SOURCE_DIR}/src/*.cpp"
-)
-
-add_executable(${PROJECT_NAME} ${main_sources})
-
-# If you are using a package manager such as brew or apt-get
-target_link_libraries(${PROJECT_NAME} raylib)
-
-# If you are using VCPKG:
-# target_include_directories(${PROJECT_NAME} PRIVATE ${RAYLIB_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE ${RAYLIB_LIBRARIES}) 
-
-#-------------------------
 # Copy assets
-#-------------------------
 
 # Set a symbolic link so exe can find the /assets folder
 
